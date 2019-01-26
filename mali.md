@@ -58,4 +58,8 @@ or
     [    6.678085] Mali: 
     [    6.678095] Mali device driver loaded
     
-    
+Copy the binary drivers:
+
+    git clone https://github.com/bootlin/mali-blobs.git
+    cd mali-blobs
+    cp -d r6p2/arm/x11_dma_buf/* /usr/lib/arm-linux-gnueabihf
