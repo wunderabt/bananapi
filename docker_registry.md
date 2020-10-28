@@ -1,5 +1,7 @@
 # Run a docker registry on the banana-pi
 
+## Server setup
+
 Install docker
 
 ```bash
@@ -33,6 +35,8 @@ sudo docker run -d \
   registry:latest
 ```
 
+## Client setup
+
 copy the certificate to each client machine
 
 ```bash
@@ -46,4 +50,13 @@ test the registry
 docker pull alpine
 docker tag alpine:latest troi.fritz.box/apline:latest
 docker push troi.fritz.box/apline:latest
+```
+
+## Rest-API
+
+some [Rest-API](https://docs.docker.com/registry/spec/api/) examples
+
+```
+https://troi.fritz.box/v2/_catalog
+https://troi.fritz.box/v2/ubapache/tags/list
 ```
