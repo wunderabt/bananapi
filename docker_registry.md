@@ -1,0 +1,49 @@
+# Run a docker registry on the banana-pi
+
+Install docker
+
+```bash
+sudo apt install docker.io
+```
+
+Create a self-signed cert that is valid for 10y
+
+```bash
+openssl req \
+  -newkey rsa:4096 -nodes -sha256 -keyout certs/domain.key \
+  -x509 -days 3650 -out certs/domain.crt
+```
+  
+When prompted for "name" enter the host name (e.g. `troi.fritz.box`)
+  
+Start the registry on that host. Note the two `-v ..` volume switches that use the certificate
+created above and use a local drive to store the images.
+
+```bash
+sudo docker pull registry
+sudo docker run -d \
+  --restart=always \
+  --name registry \
+  -v /home/public/certs:/certs \
+  -v /home/docker_registry:/var/lib/registry \
+  -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
+  -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
+  -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
+  -p 443:443 \
+  registry:latest
+```
+
+copy the certificate to each client machine
+
+```bash
+sudo mkdir -p /etc/docker/certs.d/troi.fritz.box/
+sudo cp /mnt/public/certs/domain.crt /etc/docker/certs.d/troi.fritz.box/ca.crt
+```
+
+test the registry
+
+```bash
+docker pull alpine
+docker tag alpine:latest troi.fritz.box/apline:latest
+docker push troi.fritz.box/apline:latest
+```
