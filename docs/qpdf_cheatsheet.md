@@ -76,11 +76,11 @@ gs -q \
    -dSubsetFonts=true \
    -dAutoRotatePages=/None \
    -dColorImageDownsampleType=/Bicubic \
-   -dColorImageResolution=150 \
+   -dColorImageResolution=180 \
    -dGrayImageDownsampleType=/Bicubic \
-   -dGrayImageResolution=150 \
+   -dGrayImageResolution=180 \
    -dMonoImageDownsampleType=/Bicubic \
-   -dMonoImageResolution=150 \
+   -dMonoImageResolution=180 \
    -sOutputFile=output.pdf \
    input.pdf
 ```
