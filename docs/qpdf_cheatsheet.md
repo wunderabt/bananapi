@@ -56,3 +56,31 @@ qpdf --collate --empty --pages book_ascending_pages_odd.pdf book_ascending_pages
 ```bash
 ocrmypdf -l eng book.pdf book_ocr.pdf
 ```
+
+### reduce size / resolution
+
+on less important documents that are just read on the screen I reduce the pdf size
+
+```bash
+gs -q \
+   -dNOPAUSE \
+   -dBATCH \
+   -dSAFER \
+   -dPDFA=2 \
+   -dPDFACompatibilityPolicy=1 \
+   -dSimulateOverprint=true \
+   -sDEVICE=pdfwrite \
+   -dCompatibilityLevel=1.3 \
+   -dPDFSETTINGS=/ebook \
+   -dEmbedAllFonts=true \
+   -dSubsetFonts=true \
+   -dAutoRotatePages=/None \
+   -dColorImageDownsampleType=/Bicubic \
+   -dColorImageResolution=150 \
+   -dGrayImageDownsampleType=/Bicubic \
+   -dGrayImageResolution=150 \
+   -dMonoImageDownsampleType=/Bicubic \
+   -dMonoImageResolution=150 \
+   -sOutputFile=output.pdf \
+   input.pdf
+```
