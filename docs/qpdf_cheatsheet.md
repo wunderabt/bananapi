@@ -54,7 +54,7 @@ qpdf --collate --empty --pages book_ascending_pages_odd.pdf book_ascending_pages
 ### OCR
 
 ```bash
-ocrmypdf -l eng book.pdf book_ocr.pdf
+ocrmypdf --tesseract-timeout 300 -l eng book.pdf book_ocr.pdf
 ```
 
 ### reduce size / resolution
