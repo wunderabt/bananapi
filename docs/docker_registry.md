@@ -60,3 +60,15 @@ some [Rest-API](https://docs.docker.com/registry/spec/api/) examples
 https://troi.fritz.box/v2/_catalog
 https://troi.fritz.box/v2/ubapache/tags/list
 ```
+
+### delete an image
+
+find the digest
+```bash
+curl -v --silent -H "Accept: application/vnd.docker.distribution.manifest.v2+json" -X GET https://troi.fritz.box/v2/vivado/manifests/latest | grep docker-content-digest
+```
+
+the digest can be used to delete the image
+```bash
+curl --silent -H "Accept: application/vnd.docker.distribution.manifest.v2+json" -X DELETE https://troi.fritz.box/v2/alpine/manifests/sha256:xxxxx
+```
