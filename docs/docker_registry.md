@@ -63,6 +63,26 @@ https://troi.fritz.box/v2/ubapache/tags/list
 
 ### delete an image
 
+enable deletion on the registry. Log into the running registry:
+```bash
+sudo docker exec -it <container> /bin/sh
+```
+
+and enable the deletion option
+```bash
+vi /etc/docker/registry/config.yml
+```
+
+insert
+```yaml
+  delete:
+    enabled: true
+```
+in the `storage:` section.
+
+Restart docker `sudo service docker restart`
+
+
 find the digest
 ```bash
 curl -v --silent -H "Accept: application/vnd.docker.distribution.manifest.v2+json" -X GET https://troi.fritz.box/v2/vivado/manifests/latest | grep docker-content-digest
