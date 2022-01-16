@@ -92,3 +92,10 @@ the digest can be used to delete the image
 ```bash
 curl --silent -H "Accept: application/vnd.docker.distribution.manifest.v2+json" -X DELETE https://troi.fritz.box/v2/alpine/manifests/sha256:xxxxx
 ```
+
+### garbage collect
+
+```bash
+sudo docker exec -it <container> /bin/sh
+registry garbage-collect -m /etc/docker/registry/config.yml
+```
