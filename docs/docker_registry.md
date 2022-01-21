@@ -13,6 +13,7 @@ Create a self-signed cert that is valid for 10y
 ```bash
 openssl req \
   -newkey rsa:4096 -nodes -sha256 -keyout certs/domain.key \
+  -addext "subjectAltName = DNS:troi.fritz.box" \
   -x509 -days 3650 -out certs/domain.crt
 ```
   
