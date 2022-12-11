@@ -8,6 +8,17 @@ Install docker
 sudo apt install docker.io
 ```
 
+### Special fix for Debian 10 on bpi-m2u
+On the bpi-m2u with debian 10 it failed.
+Switch /lib/systemd/system/docker.service from `-H fd://` to `-H unix://`
+
+and run
+
+```bash
+$ sudo update-alternatives --set iptables /usr/sbin/iptables-legacy
+$ sudo update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+```
+
 Create a self-signed cert that is valid for 10y
 
 ```bash
@@ -29,7 +40,8 @@ sudo docker run -d \
   --name registry \
   -v /home/public/certs:/certs \
   -v /home/docker_registry:/var/lib/registry \
-  -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
+ 
+ -e REGISTRY_HTTP_ADDR=0.0.0.0:443 \
   -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
   -e REGISTRY_HTTP_TLS_KEY=/certs/domain.key \
   -p 443:443 \
